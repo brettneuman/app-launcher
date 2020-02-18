@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Launch.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "interactive",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
