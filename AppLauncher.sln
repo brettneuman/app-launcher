@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Launch.CLI", "Launcher\Launch.CLI.csproj", "{17155281-8720-452F-AF0E-348A2473C431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Launch.CLI", "Launch.CLI\Launch.CLI.csproj", "{17155281-8720-452F-AF0E-348A2473C431}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Launch.Core", "Launch.Core\Launch.Core.csproj", "{F9068256-3CD9-4DC5-B580-544B370BFC5B}"
 EndProject

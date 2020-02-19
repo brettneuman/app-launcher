@@ -9,7 +9,7 @@
     <NoWin32Manifest>true</NoWin32Manifest>
     <Authors>Brett Neuman</Authors>
     <Description>Application launcher CLI</Description>
-    <Version>0.1.0-beta03</Version>
+    <Version>0.1.0-beta04</Version>
     <Copyright>Copyright 2020 © Brett Neuman. All rights reserved.</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/brettneuman/app-launcher</RepositoryUrl>
