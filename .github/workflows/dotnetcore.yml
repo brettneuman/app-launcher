@@ -1,4 +1,4 @@
-name: launch $GITHUB_RUN_ID
+name: BuildMaster
 
 on: [push]
 
@@ -9,6 +9,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -17,5 +18,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
 
-    - name: Publish
-      run: dotnet publish Launch.CLI\Launch.CLI.csproj --configuration Release /p:PublishSingleFile=true
+    - name: Pack
+      run: dotnet pack --configuration Release Launch.CLI\Launch.CLI.csproj
+
+    - name: Push
+      with: 
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push "Launch.CLI\nupkg\launch.0.1.0-beta05.nupkg" --source "github"
