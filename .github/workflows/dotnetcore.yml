@@ -22,6 +22,6 @@ jobs:
       run: dotnet pack --configuration Release Launch.CLI\Launch.CLI.csproj
 
     - name: Push
-      with: 
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet nuget push "Launch.CLI\nupkg\launch.0.1.0-beta05.nupkg" --source "github"
+      run: dotnet nuget push "Launch.CLI\nupkg\launch.0.1.0-beta05.nupkg" --source "github" --api-key ${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
