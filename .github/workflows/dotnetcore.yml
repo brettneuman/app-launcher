@@ -1,4 +1,4 @@
-name: launch 
+name: launch $GITHUB_RUN_ID
 
 on: [push]
 
