@@ -19,6 +19,9 @@ using NLog;
 using NLog.Extensions.Logging;
 using Launch.CLI.Commands;
 using Launch.Core;
+using Colorful;
+using Console = Colorful.Console;
+using System.Drawing;
 
 namespace Launch.CLI
 {
@@ -42,12 +45,15 @@ namespace Launch.CLI
                         ? ex.StackTrace
                         : "Error details hidden. Enable 'ShowStackTraceOnError' to see more...";
 
-                    logger.Error(ex, $"The global exception handler caught an exception: {ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                    logger.Error(ex, $"The global exception handler caught an exception: {ex.Message}{Environment.NewLine}{stackTrace}");
+                    logger.Info($"Press any key to close...");
+                    Console.ReadKey();
                 })
                 .Build();
 
             // display some startup info
-            Console.WriteLine("Launch");
+
+            Console.WriteAscii("Launch", Color.FromArgb(204,102,0));
             Console.Write($"Version: ");
             parser.Parse("--version").Invoke();
 

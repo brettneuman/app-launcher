@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.Linq;
 using Launch.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +32,11 @@ namespace Launch.CLI.Commands
                         var settingsManager = host.Services.GetRequiredService<ISettingsManager>();
                         var creds = await settingsManager.GetCredentials();
 
+                        if (!creds.Any())
+                        {
+                            console.Out.Write($"No credentials found in settings file.{Environment.NewLine}");
+                        }
+
                         foreach (var cred in creds)
                         {
                             console.Out.Write($"Credential: '{cred.Name}'{Environment.NewLine}Domain: '{cred.Domain}'{Environment.NewLine}UserName: '{cred.UserName}'{Environment.NewLine}");
@@ -53,6 +59,11 @@ namespace Launch.CLI.Commands
                     {
                         var settingsManager = host.Services.GetRequiredService<ISettingsManager>();
                         var apps = await settingsManager.GetApplications();
+
+                        if (!apps.Any())
+                        {
+                            console.Out.Write($"No applications found in settings file.{Environment.NewLine}");
+                        }
 
                         foreach (var app in apps)
                         {

@@ -1,35 +1,27 @@
-﻿# run this script from the same directory where you downloaded launch.exe
+﻿
+# install the "launch" dotnet global tool
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) 
 { 
-    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit 
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; 
+    exit 
 }
 
-$executableFileName = "launch.exe"
-$installationPath = "C:\Program Files\AppLauncher\"
+# first make sure we have the latest version of dotnet
+Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
 
-$path = $env:PATH;
+# check if there was an error and if so just exit out of the script
 
-if (!(Test-Path $executableFileName)) {
-    Write-Host "$executableFileName not found."
-    exit 1
-}
-
-if (!(Test-Path $installationPath)) {
-    Write-Host "Creating directory $installationPath..."
-    New-Item -ItemType "directory" -Path $installationPath
-}
-
-Write-Host "Copying $executableFileName to $installationPath..."
-
-$source = Resolve-Path "launch.exe"
-Copy-Item -Path $source -Destination $installationPath -Force
-
-Write-Host "Adding $installationPath to PATH..."
-if (!($path.Contains($installationPath))) 
+$ScriptBlockContent =
 {
-    [System.Environment]::SetEnvironmentVariable("PATH", $path + ";$installationPath", "Machine")
+    ./dotnet-install.ps1 -InstallDir '~/.dotnet' -Channel LTS
 }
+Invoke-Command -ScriptBlock $ScriptBlockContent
 
-Write-Host "Installation complete"
-exit 0
+# install the latest LTS supported version of dotnet
+Invoke-Command dotnet-install.ps1 -Channel LTS
+
+# install launch global tool
+Invoke-Command dotnet tool install launch --global --version 0.1.0-beta06
+
+

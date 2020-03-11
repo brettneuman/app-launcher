@@ -44,7 +44,10 @@ namespace Launch.Core.Services
         {
             if (!File.Exists(_settingsFilePath))
             {
-                throw new Exception($"The settings file could not be found at location: {_settingsFilePath}");
+                _logger.LogWarning($"No settings file found at location: {_settingsFilePath}");
+                _logger.LogWarning($"A blank settings file will be created.");
+
+                File.Create(_settingsFilePath).Close();
             }
 
             try
