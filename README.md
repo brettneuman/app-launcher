@@ -9,7 +9,7 @@ Run a windows application using different domain credentials without needing to 
 - dotnet core 3.1 SDK
    - [Windows SDK Link (for developer teams)](https://download.visualstudio.microsoft.com/download/pr/5aad9c2c-7bb6-45b1-97e7-98f12cb5b63b/6f6d7944c81b043bdb9a7241529a5504/dotnet-sdk-3.1.102-win-x64.exe)
    - [Latest Downloads Page](https://dotnet.microsoft.com/download/dotnet-core/3.1)
-- 
+
 # Command to install
 Use the following command in install **_LAUNCH_**
 `dotnet tool install launch --global`
@@ -54,10 +54,15 @@ Using the **_LAUNCH_** tool is pretty simple.
 - Also, it's a good idea to change your icon otherwise, it will show a generic icon for all links that use **_LAUNCH_**
 
 ---
-# Starter Settings File
-The settings file is located at `c:\users\{UserName}\AppData\Local\app-launcher`
 
-You can past the **applications** section in directly, but the **credentials** will need to be added using the commands.
+# Saved Data
+
+**_LAUNCH_** will store your credentials in a file located at `c:\users\{UserName}\AppData\Local\app-launcher`
+The password is encrypted using the `AES_256_GCM` algorithm.
+
+---
+# Starter Settings File
+You can paste the **applications** section in directly, but the **credentials** will need to be added using the commands due to the encryption on the passwords.
 ```
 {
   "Credentials": [ ],
